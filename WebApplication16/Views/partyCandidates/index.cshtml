@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApplication16.Models.partyCandidate>
+
+
+<p>
+    <strong>اسم الحزب:</strong> @ViewBag.PartyName <br />
+</p>
+@{ if (Model.Count() == 41)
+    {
+    <p>
+        <button id="goToNextPage" class="btn btn-primary">اذهب إلى الصفحة التالية</button>
+    </p>
+    }
+    else
+    {
+    <p>
+        @Html.ActionLink("ادخال ناخب", "Create")
+    </p>
+        }
+    }
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>الرقم الوطني</th>
+            <th>الاسم</th>
+            <th>الايميل</th>
+            <th>الهاتف</th>
+            <th>تاريخ الميلاد</th>
+            <th>الجنس</th>
+            <th>نوع المقعد</th>
+            <th>ديانه</th>
+            <th>دائره المحلية</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.nationalId)</td>
+                <td>@Html.DisplayFor(modelItem => item.name)</td>
+                <td>@Html.DisplayFor(modelItem => item.email)</td>
+                <td>@Html.DisplayFor(modelItem => item.phone)</td>
+                <td>@(item.birthDay.HasValue ? item.birthDay.Value.ToString("yyyy-MM-dd") : string.Empty)</td>
+                <td>@Html.DisplayFor(modelItem => item.gender)</td>
+                <td>@Html.DisplayFor(modelItem => item.typeOfChair)</td>
+                <td>@Html.DisplayFor(modelItem => item.religion)</td>
+                <td>@Html.DisplayFor(modelItem => item.electoralDistrict)</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = item.id })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+        document.getElementById("goToNextPage").onclick = function () {
+            window.location.href = '@Url.Action("success", "partyCandidates")';
+        };
+    </script>
+}

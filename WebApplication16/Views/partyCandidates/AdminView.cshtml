@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApplication16.Models.partyCandidate>
+
+@{
+    ViewBag.Title = "AdminView";
+}
+
+<h2>AdminView</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.First().email)</th>
+                <th>@Html.DisplayNameFor(model => model.First().name)</th>
+                <th>@Html.DisplayNameFor(model => model.First().phone)</th>
+                <th>@Html.DisplayNameFor(model => model.First().nationalId)</th>
+                <th>@Html.DisplayNameFor(model => model.First().gender)</th>
+                <th>@Html.DisplayNameFor(model => model.First().birthDay)</th>
+                <th>@Html.DisplayNameFor(model => model.First().typeOfChair)</th>
+                <th>@Html.DisplayNameFor(model => model.First().religion)</th>
+                <th>@Html.DisplayNameFor(model => model.First().electoralDistrict)</th>
+                <th>@Html.DisplayNameFor(model => model.First().partyList.partyName)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var rowClass = item.status == "1" ? "table-success" : "table-secondary";
+                <tr class="@rowClass">
+                    <td>@Html.DisplayFor(modelItem => item.email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.phone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.nationalId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.gender)</td>
+                    <td>@(item.birthDay.HasValue ? item.birthDay.Value.ToString("yyyy-MM-dd") : string.Empty)</td>
+                    <td>@Html.DisplayFor(modelItem => item.typeOfChair)</td>
+                    <td>@Html.DisplayFor(modelItem => item.religion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.electoralDistrict)</td>
+                    <td>@Html.DisplayFor(modelItem => item.partyList.partyName)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-sm btn-info" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-sm btn-primary" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger" }) |
+                        @Html.ActionLink("مكتمل", "SetStatus", new { id = item.id, status = "1" }, new { @class = "btn btn-sm btn-success" }) |
+                        @Html.ActionLink("غير مكتمل", "SetStatus", new { id = item.id, status = "0" }, new { @class = "btn btn-sm btn-secondary" })
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No candidates found for the selected party.</p>
+}
+<a href="@Url.Action("Index", "partyLists")" class="btn btn-dark">رجوع للخلف</a>
+
+
+
+    <div id="messageBox" class="alert" style="display: none;"></div>

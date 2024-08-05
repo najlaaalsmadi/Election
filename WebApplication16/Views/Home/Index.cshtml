@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main class="container mt-4">
+    <div class="row">
+        <!-- بطاقة قائمة الحزب -->
+        <div class="col-md-6 mb-4">
+            <a href="@Url.Action("Createuser", "partyLists")" class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">قائمة الحزب</h5>
+                    <p class="card-text">
+                        عند ضغط هما سوف تتجه لانشاء القائمه الحزبيه من اجل الترشح للانتخابات
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <!-- بطاقة القائمة المحلية -->
+        <div class="col-md-6 mb-4">
+            <a href="@Url.Action("", "")" class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">القائمة المحلية</h5>
+                    <p class="card-text">
+                        عند ضغط هما سوف تتجه لانشاء القائمه المحلية من اجل الترشح للانتخابات
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</main>

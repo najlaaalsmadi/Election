@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebApplication16.Models.partyList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.partyName)</th>
+            <th>@Html.DisplayNameFor(model => model.status)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var rowClass = item.status == "1" ? "table-success" : "table-secondary";
+            <tr class="@rowClass">
+                <td>@Html.DisplayFor(modelItem => item.partyName)</td>
+                <td>@Html.DisplayFor(modelItem => item.status)</td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id }) |
+                    <button class="btn btn-primary goToNextPage" data-partyname="@item.partyName">اذهب إلى التفاصيل</button>
+                   
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        document.querySelectorAll(".goToNextPage").forEach(function(button) {
+            button.addEventListener("click", function() {
+                var partyName = this.getAttribute("data-partyname");
+                $.post('@Url.Action("StorePartyNameInSession", "PartyCandidates")', { partyName: partyName }, function(data) {
+                    if (data.success) {
+                        window.location.href = '@Url.Action("AdminView", "PartyCandidates")';
+                    }
+                });
+            });
+        });
+    </script>
+}

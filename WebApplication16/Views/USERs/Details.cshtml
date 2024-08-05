@@ -1,0 +1,122 @@
+﻿@model WebApplication16.Models.USER
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>USER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NationalID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NationalID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.election_area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.election_area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.governorate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.governorate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.birth_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.birth_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.religion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.religion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.localYouth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.localYouth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.partyVote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.partyVote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.whileLocalVote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.whileLocalVote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.whilePartyVote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.whilePartyVote)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
