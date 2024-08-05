@@ -40,8 +40,7 @@
                     <td>@Html.DisplayFor(modelItem => item.electoralDistrict)</td>
                     <td>@Html.DisplayFor(modelItem => item.partyList.partyName)</td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-sm btn-info" }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-sm btn-primary" }) |
+                       
                         @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger" }) |
                         @Html.ActionLink("مكتمل", "SetStatus", new { id = item.id, status = "1" }, new { @class = "btn btn-sm btn-success" }) |
                         @Html.ActionLink("غير مكتمل", "SetStatus", new { id = item.id, status = "0" }, new { @class = "btn btn-sm btn-secondary" })

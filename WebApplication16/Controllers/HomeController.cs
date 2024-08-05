@@ -19,7 +19,8 @@ namespace WebApplication16.Controllers
 
             return View();
         }
-
+        public ActionResult QA() { return View(); }
+        public ActionResult ploice() { return  View(); }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

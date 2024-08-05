@@ -6,11 +6,11 @@
     <div class="row">
         <!-- بطاقة قائمة الحزب -->
         <div class="col-md-6 mb-4">
-            <a href="@Url.Action("Createuser", "partyLists")" class="card" style="width: 100%;">
-                <div class="card-body">
+            <a href="@Url.Action("Createuser", "partyLists")" class="card card-hover text-decoration-none" style="height: 300px;">
+                <div class="card-body bg-primary text-white rounded h-100 d-flex flex-column justify-content-center">
                     <h5 class="card-title">قائمة الحزب</h5>
                     <p class="card-text">
-                        عند ضغط هما سوف تتجه لانشاء القائمه الحزبيه من اجل الترشح للانتخابات
+                        عند ضغط هنا سوف تتجه لإنشاء القائمة الحزبية من أجل الترشح للانتخابات
                     </p>
                 </div>
             </a>
@@ -18,14 +18,25 @@
 
         <!-- بطاقة القائمة المحلية -->
         <div class="col-md-6 mb-4">
-            <a href="@Url.Action("", "")" class="card" style="width: 100%;">
-                <div class="card-body">
+            <a href="@Url.Action("", "")" class="card card-hover text-decoration-none" style="height: 300px;">
+                <div class="card-body bg-success text-white rounded h-100 d-flex flex-column justify-content-center">
                     <h5 class="card-title">القائمة المحلية</h5>
                     <p class="card-text">
-                        عند ضغط هما سوف تتجه لانشاء القائمه المحلية من اجل الترشح للانتخابات
+                        عند ضغط هنا سوف تتجه لإنشاء القائمة المحلية من أجل الترشح للانتخابات
                     </p>
                 </div>
             </a>
         </div>
     </div>
 </main>
+
+<style>
+    .card-hover {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .card-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+</style>

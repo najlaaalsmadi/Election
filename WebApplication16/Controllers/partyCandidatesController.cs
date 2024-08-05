@@ -15,8 +15,11 @@ namespace WebApplication16.Controllers
     public class partyCandidatesController : Controller
     {
         private ElectionsEntities1 db = new ElectionsEntities1();
+
         public ActionResult SetStatus(long id, string status)
         {
+            var partyName = Session["PartyName"] as string;
+
             // البحث عن المرشح باستخدام المعرف
             var candidate = db.partyCandidates.Find(id);
             if (candidate == null)
@@ -47,7 +50,8 @@ namespace WebApplication16.Controllers
                     {
                         SendEmail("انت مرفوض في تقديم", "election2024jordan@gmail.com");
                         ViewBag.Message = "Email sent successfully.";
-                        return View("AdminView");
+                        ViewBag.PartyName = partyName;
+                        return RedirectToAction("AdminView", new { partyName = partyName });
                     }
                     catch (Exception ex)
                     {
@@ -74,7 +78,8 @@ namespace WebApplication16.Controllers
                         {
                             SendEmail("تم الموافقه على طلبك", "election2024jordan@gmail.com");
                             ViewBag.Message = "Email sent successfully.";
-                            return View("AdminView");
+                            ViewBag.PartyName = partyName;
+                            return RedirectToAction("AdminView", new { partyName = partyName });
                         }
                         catch (Exception ex)
                         {
@@ -86,35 +91,36 @@ namespace WebApplication16.Controllers
                 }
             }
 
-            return RedirectToAction("AdminView");
+            return RedirectToAction("AdminView", new { partyName = partyName });
         }
+
 
         private void SendEmail(string messageText, string toEmail)
-        {
-            string fromEmail = "ayahaldomi@gmail.com";
-            string fromName = "test";
-            string subjectText = "نتيجتك في طلب تقديم";
+{
+    string fromEmail = "ayahaldomi@gmail.com";
+    string fromName = "test";
+    string subjectText = "نتيجتك في طلب تقديم";
 
-            string smtpServer = "smtp.gmail.com";
-            int smtpPort = 465; // Port 465 for SSL
+    string smtpServer = "smtp.gmail.com";
+    int smtpPort = 465; // Port 465 for SSL
 
-            string smtpUsername = "election2024jordan@gmail.com";
-            string smtpPassword = "zwht jwiz ivfr viyt"; // Ensure this is correct
+    string smtpUsername = "election2024jordan@gmail.com";
+    string smtpPassword = "zwht jwiz ivfr viyt"; // Ensure this is correct
 
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(fromName, fromEmail));
-            message.To.Add(new MailboxAddress("", toEmail));
-            message.Subject = subjectText;
-            message.Body = new TextPart("plain") { Text = messageText };
+    var message = new MimeMessage();
+    message.From.Add(new MailboxAddress(fromName, fromEmail));
+    message.To.Add(new MailboxAddress("", toEmail));
+    message.Subject = subjectText;
+    message.Body = new TextPart("plain") { Text = messageText };
 
-            using (var client = new SmtpClient())
-            {
-                client.Connect(smtpServer, smtpPort, true); // Use SSL
-                client.Authenticate(smtpUsername, smtpPassword);
-                client.Send(message);
-                client.Disconnect(true);
-            }
-        }
+    using (var client = new SmtpClient())
+    {
+        client.Connect(smtpServer, smtpPort, true); // Use SSL
+        client.Authenticate(smtpUsername, smtpPassword);
+        client.Send(message);
+        client.Disconnect(true);
+    }
+}
 
 
 
@@ -164,13 +170,22 @@ namespace WebApplication16.Controllers
         [HttpPost]
         public JsonResult StorePartyNameInSession(string partyName)
         {
-            Session["SelectedPartyName"] = partyName;
+            Session["PartyName"] = partyName;
             return Json(new { success = true });
         }
 
-        public ActionResult AdminView()
+
+        public ActionResult AdminView(string partyName)
         {
-            string partyName = Session["SelectedPartyName"] as string;
+            if (string.IsNullOrEmpty(partyName))
+            {
+                partyName = Session["PartyName"] as string;
+            }
+            else
+            {
+                Session["PartyName"] = partyName;
+            }
+
             if (string.IsNullOrEmpty(partyName))
             {
                 // التعامل مع الحالة عندما لا يكون partyName مخزن في الجلسة
@@ -178,6 +193,7 @@ namespace WebApplication16.Controllers
             }
 
             var candidates = db.partyCandidates.Where(pc => pc.partyList.partyName == partyName).ToList();
+            ViewBag.PartyName = partyName;
             return View(candidates);
         }
 
@@ -186,7 +202,8 @@ namespace WebApplication16.Controllers
 
 
 
-            [HttpGet]
+
+        [HttpGet]
         public ActionResult SearchUser(string nationalIdSearch)
         {
             if (string.IsNullOrEmpty(nationalIdSearch))

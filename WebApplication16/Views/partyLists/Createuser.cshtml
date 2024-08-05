@@ -4,32 +4,54 @@
     ViewBag.Title = "Createuser";
 }
 
-<h2>Createuser</h2>
+<h2>إنشاء قائمة الحزب</h2>
 
+<div class="row">
+    <!-- عمود النموذج -->
+    <div class="col-md-6">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>partyList</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.partyName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.partyName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.partyName, "", new { @class = "text-danger" })
+            <div class="form-horizontal">
+                <h4>إدخال اسم الحزب</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.partyName, "اسم الحزب", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.partyName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.partyName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <input type="submit" value="إنشاء" class="btn btn-primary btn-animate" />
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        }
     </div>
-}
+
+    <!-- عمود الصورة -->
+    <div class="col-md-6">
+        <img src="~/images/img1.jpg" class="img-fluid" alt="صورة تعبيرية" />
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<style>
+    .btn-animate {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .btn-animate:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+</style>

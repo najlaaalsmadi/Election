@@ -240,10 +240,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="images\about-img.jpg" />
+    <Content Include="images\about.jpg" />
     <Content Include="images\client1.jpg" />
     <Content Include="images\client2.jpg" />
     <Content Include="images\flag-france.png" />
     <Content Include="images\flag-uk.png" />
+    <Content Include="images\img1.jpg" />
     <Content Include="images\input-location.png" />
     <Content Include="images\input-price.png" />
     <Content Include="images\input-property.png" />
@@ -258,6 +260,12 @@
     <Content Include="images\w1.png" />
     <Content Include="images\w2.png" />
     <Content Include="images\w3.png" />
+    <Content Include="images\الانتخابات البلدية.png" />
+    <Content Include="images\الانتخابات الجامعية.jpg" />
+    <Content Include="images\الانتخابات الخاصة بالشركات.jpg" />
+    <Content Include="images\الانتخابات الرئاسية العالمية.jpg" />
+    <Content Include="images\الانتخابات المهنية.jpg" />
+    <Content Include="images\النقابات العمالية.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\custom.js" />
     <Content Include="js\jquery-3.4.1.min.js" />
@@ -312,16 +320,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\partyLists\Delete.cshtml" />
     <Content Include="Views\partyLists\Index.cshtml" />
     <Content Include="Views\partyLists\Createuser.cshtml" />
     <Content Include="Views\partyCandidates\Create.cshtml" />
     <Content Include="Views\partyCandidates\Delete.cshtml" />
-    <Content Include="Views\partyCandidates\Details.cshtml" />
-    <Content Include="Views\partyCandidates\Edit.cshtml" />
     <Content Include="Views\partyCandidates\index.cshtml" />
     <Content Include="Views\USERs\Create.cshtml" />
     <Content Include="Views\USERs\Delete.cshtml" />
@@ -335,6 +339,10 @@
     <Content Include="Views\Payments\Index.cshtml" />
     <Content Include="Views\partyCandidates\AdminView.cshtml" />
     <Content Include="Views\partyCandidates\success.cshtml" />
+    <Content Include="Views\Shared\_Layout1.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\ploice.cshtml" />
+    <Content Include="Views\Home\QA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
