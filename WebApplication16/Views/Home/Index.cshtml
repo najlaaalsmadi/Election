@@ -6,8 +6,9 @@
     <div class="row">
         <!-- بطاقة قائمة الحزب -->
         <div class="col-md-6 mb-4">
-            <a href="@Url.Action("Createuser", "partyLists")" class="card card-hover text-decoration-none" style="height: 300px;">
-                <div class="card-body bg-primary text-white rounded h-100 d-flex flex-column justify-content-center">
+            <a href="@Url.Action("Createuser", "partyLists")" class="card card-hover text-decoration-none text-black" style="height: 300px;">
+                <img src="~/images/party-list.jpg" class="card-img-top" alt="قائمة الحزب" style="height: 150px; object-fit: cover;">
+                <div class="card-body bg-light text-danger rounded-bottom h-100 d-flex flex-column justify-content-center">
                     <h5 class="card-title">قائمة الحزب</h5>
                     <p class="card-text">
                         عند ضغط هنا سوف تتجه لإنشاء القائمة الحزبية من أجل الترشح للانتخابات
@@ -18,8 +19,9 @@
 
         <!-- بطاقة القائمة المحلية -->
         <div class="col-md-6 mb-4">
-            <a href="@Url.Action("", "")" class="card card-hover text-decoration-none" style="height: 300px;">
-                <div class="card-body bg-success text-white rounded h-100 d-flex flex-column justify-content-center">
+            <a href="@Url.Action("", "")" class="card card-hover text-black text-decoration-none" style="height: 300px;">
+                <img src="~/images/local-list.jpg" class="card-img-top" alt="القائمة المحلية" style="height: 150px; object-fit: cover;">
+                <div class="card-body bg-light text-danger rounded-bottom h-100 d-flex flex-column justify-content-center">
                     <h5 class="card-title">القائمة المحلية</h5>
                     <p class="card-text">
                         عند ضغط هنا سوف تتجه لإنشاء القائمة المحلية من أجل الترشح للانتخابات
@@ -39,4 +41,22 @@
             transform: scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 1.1rem;
+    }
 </style>

@@ -1,10 +1,4 @@
-﻿<!-- SweetAlert2 CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
-<!-- SweetAlert2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-
-@model IEnumerable<WebApplication16.Models.partyCandidate>
+﻿@model IEnumerable<WebApplication16.Models.partyCandidate>
 
 @{
     ViewBag.Title = "AdminView";
@@ -12,9 +6,9 @@
 }
 
 <div class="container mt-5">
-    <h2 class="mb-4 text-center">قائمة المرشحين</h2>
+    <h2 class="mb-4 text-center animated-header">قائمة المرشحين</h2>
 
-    <div class="d-flex justify-content-center mb-4 w-100">
+    <div class="d-flex justify-content-center mb-4">
         <div class="btn-group" role="group" aria-label="Filter buttons">
             <button type="button" class="btn btn-outline-primary filter-btn" data-status="all">جميع المرشحين</button>
             <button type="button" class="btn btn-outline-success filter-btn" data-status="completed">مكتمل</button>
@@ -22,77 +16,155 @@
         </div>
     </div>
 
-    <div class="row">
-        @if (Model != null && Model.Any())
-        {
-            foreach (var item in Model)
-            {
-                var cardClass = item.status == "1" ? "border-success" : "border-secondary";
-                var badgeClass = item.status == "1" ? "badge-success" : "badge-secondary";
-                var statusText = item.status == "1" ? "مكتمل" : "غير مكتمل";
-                var cardStatus = item.status == "1" ? "completed" : "incomplete";
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">الصورة</th>
+                        <th scope="col">الاسم</th>
+                        <th scope="col">الحالة</th>
+                        <th scope="col">البريد الإلكتروني</th>
+                        <th scope="col">الهاتف</th>
+                        <th scope="col">رقم الهوية</th>
+                        <th scope="col">الجنس</th>
+                        <th scope="col">تاريخ الميلاد</th>
+                        <th scope="col">نوع المقعد</th>
+                        <th scope="col">الديانة</th>
+                        <th scope="col">الدائرة الانتخابية</th>
+                        <th scope="col">اسم الحزب</th>
+                        <th scope="col">إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var badgeClass = item.status == "1" ? "badge-success" : "badge-secondary";
+                        var statusText = item.status == "1" ? "مكتمل" : "غير مكتمل";
+                        var rowClass = item.status == "1" ? "completed" : "incomplete";
 
-                var imageUrl = item.status == "1" ? Url.Content("~/images/تم الموافقه على طلب.png") : Url.Content("~/images/طلب قيد دراسة.png");
+                        var imageUrl = item.status == "1" ? Url.Content("~/images/تم الموافقه على طلب.png") : Url.Content("~/images/طلب قيد دراسة.png");
 
-                <div class="col-md-4 mb-4 candidate-card" data-status="@cardStatus">
-                    <div class="card @cardClass shadow-sm">
-                        <img src="@imageUrl" class="card-img-top" alt="Party Image">
-                        <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.name)</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                <span class="badge @badgeClass">@statusText</span>
-                            </h6>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li><strong>البريد الإلكتروني:</strong> @Html.DisplayFor(modelItem => item.email)</li>
-                                <li><strong>الهاتف:</strong> @Html.DisplayFor(modelItem => item.phone)</li>
-                                <li><strong>رقم الهوية:</strong> @Html.DisplayFor(modelItem => item.nationalId)</li>
-                                <li><strong>الجنس:</strong> @Html.DisplayFor(modelItem => item.gender)</li>
-                                <li><strong>تاريخ الميلاد:</strong> @(item.birthDay.HasValue ? item.birthDay.Value.ToString("yyyy-MM-dd") : string.Empty)</li>
-                                <li><strong>نوع المقعد:</strong> @Html.DisplayFor(modelItem => item.typeOfChair)</li>
-                                <li><strong>الديانة:</strong> @Html.DisplayFor(modelItem => item.religion)</li>
-                                <li><strong>الدائرة الانتخابية:</strong> @Html.DisplayFor(modelItem => item.electoralDistrict)</li>
-                                <li><strong>اسم الحزب:</strong> @Html.DisplayFor(modelItem => item.partyList.partyName)</li>
-                            </ul>
-                            <div class="btn-group mt-3" role="group">
-                                @Html.ActionLink("حذف", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger mx-1" })
-                                @Html.ActionLink("مكتمل", "SetStatus", new { id = item.id, status = "1" }, new { @class = "btn btn-sm btn-success mx-1" })
-                                @Html.ActionLink("غير مكتمل", "SetStatus", new { id = item.id, status = "0" }, new { @class = "btn btn-sm btn-secondary mx-1" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <script type="text/javascript">
-                Swal.fire({
-                    icon: 'info',
-                    title: 'لا توجد مرشحين',
-                    text: 'لا توجد مرشحين للقائمة المحددة حالياً. يرجى التحقق من البيانات أو إضافة مرشحين جدد.',
-                    confirmButtonText: 'رجوع للخلف'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '@Url.Action("IndexAdmin", "partyLists")';
+                        <tr class="candidate-row" data-status="@rowClass">
+                            <td><img src="@imageUrl" alt="Party Image" class="img-fluid rounded-circle" style="height: 50px; width: 50px; object-fit: cover;"></td>
+                            <td>@Html.DisplayFor(modelItem => item.name)</td>
+                            <td><span class="badge @badgeClass">@statusText</span></td>
+                            <td>@Html.DisplayFor(modelItem => item.email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.phone)</td>
+                            <td>@Html.DisplayFor(modelItem => item.nationalId)</td>
+                            <td>@Html.DisplayFor(modelItem => item.gender)</td>
+                            <td>@(item.birthDay.HasValue ? item.birthDay.Value.ToString("yyyy-MM-dd") : string.Empty)</td>
+                            <td>@Html.DisplayFor(modelItem => item.typeOfChair)</td>
+                            <td>@Html.DisplayFor(modelItem => item.religion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.electoralDistrict)</td>
+                            <td>@Html.DisplayFor(modelItem => item.partyList.partyName)</td>
+                            <td>
+                                <div class="btn-group-vertical" role="group">
+                                    @Html.ActionLink("حذف", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger my-1" })
+                                    @Html.ActionLink("مكتمل", "SetStatus", new { id = item.id, status = "1" }, new { @class = "btn btn-sm btn-success my-1" })
+                                    @Html.ActionLink("غير مكتمل", "SetStatus", new { id = item.id, status = "0" }, new { @class = "btn btn-sm btn-secondary my-1" })
+                                </div>
+                            </td>
+                        </tr>
                     }
-                });
-            </script>
-        }
-    </div>
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <script type="text/javascript">
+            Swal.fire({
+                icon: 'info',
+                title: 'لا توجد مرشحين',
+                text: 'لا توجد مرشحين للقائمة المحددة حالياً. يرجى التحقق من البيانات أو إضافة مرشحين جدد.',
+                confirmButtonText: 'رجوع للخلف'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("IndexAdmin", "partyLists")';
+                }
+            });
+        </script>
+    }
 </div>
 
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $(".filter-btn").click(function () {
                 var status = $(this).data("status");
                 if (status === "all") {
-                    $(".candidate-card").show();
+                    $(".candidate-row").show();
                 } else {
-                    $(".candidate-card").hide();
-                    $(".candidate-card[data-status='" + status + "']").show();
+                    $(".candidate-row").hide();
+                    $(".candidate-row[data-status='" + status + "']").show();
                 }
             });
         });
     </script>
 }
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/css/site.css" rel="stylesheet">
+
+<style>
+    .container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #007bff;
+        font-weight: bold;
+        margin-bottom: 30px;
+        opacity: 0; /* Initial state */
+        animation: fadeIn 2s ease-in-out forwards; /* Apply animation */
+    }
+
+    .animated-header {
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    .btn-group .btn {
+        margin-right: 5px;
+    }
+
+    .btn-group-vertical .btn {
+        margin-bottom: 5px;
+        transition: transform 0.3s ease;
+    }
+
+        .btn-group-vertical .btn:hover {
+            transform: scale(1.05);
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-5px);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .table img {
+        height: 50px;
+        width: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .badge-success {
+        background-color: #28a745;
+    }
+
+    .badge-secondary {
+        background-color: #6c757d;
+    }
+</style>
