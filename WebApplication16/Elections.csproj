@@ -160,6 +160,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\partyCandidatesController.cs" />
     <Compile Include="Controllers\partyListsController.cs" />
@@ -241,6 +242,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="images\about-img.jpg" />
     <Content Include="images\about.jpg" />
+    <Content Include="images\Black Golden Modern Luxury Logo.png" />
     <Content Include="images\client1.jpg" />
     <Content Include="images\client2.jpg" />
     <Content Include="images\flag-france.png" />
@@ -262,6 +264,9 @@
     <Content Include="images\s6.jpg" />
     <Content Include="images\slider-bg.jpg" />
     <Content Include="images\الانتخابات الحزبيه.jpg" />
+    <Content Include="images\القائمة الحزبية.png" />
+    <Content Include="images\القائمة المحلية.png" />
+    <Content Include="images\القائمه الحزبيه2.png" />
     <Content Include="images\تم الموافقه على طلب.png" />
     <Content Include="images\طلب قيد دراسة.png" />
     <Content Include="vendor\animsition\animsition.min.css" />
@@ -541,6 +546,12 @@
     <Content Include="Views\Home\ploice.cshtml" />
     <Content Include="Views\Home\QA.cshtml" />
     <Content Include="Views\partyLists\IndexAdmin.cshtml" />
+    <Content Include="Views\Admins\Create.cshtml" />
+    <Content Include="Views\Admins\Delete.cshtml" />
+    <Content Include="Views\Admins\Details.cshtml" />
+    <Content Include="Views\Admins\Edit.cshtml" />
+    <Content Include="Views\Admins\Index.cshtml" />
+    <Content Include="Views\Home\LoginAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

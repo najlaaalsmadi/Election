@@ -1,7 +1,7 @@
 ﻿@model WebApplication16.Models.partyList
 
 @{
-    ViewBag.Title = "Createuser";
+    ViewBag.Title = "إنشاء قائمة الحزب";
 }
 
 <div class="container mt-5">
@@ -45,17 +45,17 @@
 
 <style>
     body {
-        background-color: #f8f9fa;
+        background-color: #f8f9fa; /* خلفية فاتحة */
         font-family: 'Arial', sans-serif;
     }
 
     h2 {
         font-weight: bold;
-        color: #007bff;
+        color: #003366; /* كحلي داكن */
     }
 
     .form-horizontal {
-        background-color: #ffffff;
+        background-color: #ffffff; /* خلفية بيضاء */
         padding: 30px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -63,8 +63,18 @@
 
     .form-label {
         font-weight: bold;
-        color: #343a40;
+        color: #002244; /* كحلي أغمق */
     }
+
+    .btn-primary {
+        background-color: #004080; /* كحلي */
+        border-color: #003366; /* كحلي داكن */
+    }
+
+        .btn-primary:hover {
+            background-color: #003366; /* كحلي داكن */
+            border-color: #002244; /* كحلي أغمق */
+        }
 
     .btn-animate {
         transition: transform 0.3s, box-shadow 0.3s;

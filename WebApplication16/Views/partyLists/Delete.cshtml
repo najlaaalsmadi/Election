@@ -1,40 +1,30 @@
 ﻿@model WebApplication16.Models.partyList
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "تأكيد الحذف";
 }
 
-<h2>Delete</h2>
+<div class="container mt-4">
+    <h3 class="text-center mb-4">هل أنت متأكد أنك تريد حذف هذا؟</h3>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>partyList</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.partyName)
-        </dt>
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">اسم الحزب</dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.partyName)
+                </dd>
+            </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.partyName)
-        </dd>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <dt>
-            @Html.DisplayNameFor(model => model.counter)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.counter)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                    @Html.ActionLink("رجوع إلى القائمة", "Index", new { area = "" }, new { @class = "btn btn-secondary" })
+                </div>
+            }
         </div>
-    }
+    </div>
 </div>

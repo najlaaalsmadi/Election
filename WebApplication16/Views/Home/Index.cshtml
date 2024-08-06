@@ -6,12 +6,12 @@
     <div class="row">
         <!-- بطاقة قائمة الحزب -->
         <div class="col-md-6 mb-4">
-            <a href="@Url.Action("Createuser", "partyLists")" class="card card-hover text-decoration-none text-black" style="height: 300px;">
-                <img src="~/images/party-list.jpg" class="card-img-top" alt="قائمة الحزب" style="height: 150px; object-fit: cover;">
-                <div class="card-body bg-light text-danger rounded-bottom h-100 d-flex flex-column justify-content-center">
+            <a href="@Url.Action("Createuser", "partyLists")" class="card card-hover text-decoration-none text-black" style="height: 400px; width: 100%; max-width: 600px;">
+                <img src="~/images/القائمه الحزبيه2.png" class="card-img-top" alt="قائمة الحزب" style="height: 300px; object-fit: cover; border-bottom: 2px solid #003366;" />
+                <div class="card-body bg-dark text-light rounded-bottom d-flex flex-column justify-content-center align-items-center">
                     <h5 class="card-title">قائمة الحزب</h5>
                     <p class="card-text">
-                        عند ضغط هنا سوف تتجه لإنشاء القائمة الحزبية من أجل الترشح للانتخابات
+                        عند ضغط هنا سوف تتجه لإنشاء القائمة الحزبية من أجل الترشح للانتخابات.
                     </p>
                 </div>
             </a>
@@ -19,12 +19,12 @@
 
         <!-- بطاقة القائمة المحلية -->
         <div class="col-md-6 mb-4">
-            <a href="@Url.Action("", "")" class="card card-hover text-black text-decoration-none" style="height: 300px;">
-                <img src="~/images/local-list.jpg" class="card-img-top" alt="القائمة المحلية" style="height: 150px; object-fit: cover;">
-                <div class="card-body bg-light text-danger rounded-bottom h-100 d-flex flex-column justify-content-center">
+            <a href="@Url.Action("", "")" class="card card-hover text-decoration-none text-black" style="height: 400px; width: 100%; max-width: 600px;">
+                <img src="~/images/القائمة المحلية.png" class="card-img-top" alt="القائمة المحلية" style="height: 300px; object-fit: cover; border-bottom: 2px solid #003366;" />
+                <div class="card-body bg-dark text-light rounded-bottom d-flex flex-column justify-content-center align-items-center">
                     <h5 class="card-title">القائمة المحلية</h5>
                     <p class="card-text">
-                        عند ضغط هنا سوف تتجه لإنشاء القائمة المحلية من أجل الترشح للانتخابات
+                        عند ضغط هنا سوف تتجه لإنشاء القائمة المحلية من أجل الترشح للانتخابات.
                     </p>
                 </div>
             </a>
@@ -35,6 +35,7 @@
 <style>
     .card-hover {
         transition: transform 0.3s, box-shadow 0.3s;
+        border: 2px solid #003366; /* Navy Blue border for cards */
     }
 
         .card-hover:hover {
@@ -43,20 +44,19 @@
         }
 
     .card-body {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
+        background-color: #003f6c; /* Darker navy blue for card background */
+        color: #ffffff; /* White text for better contrast */
     }
 
     .card-title {
-        font-size: 1.5rem;
-        font-weight: bold;
+        color: #ffffff; /* White title text */
     }
 
     .card-text {
-        font-size: 1.1rem;
+        color: #cce0ff; /* Light blue text for card descriptions */
+    }
+
+    .card-img-top {
+        border-bottom: 2px solid #003366; /* Navy Blue border for images */
     }
 </style>

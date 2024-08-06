@@ -55,6 +55,13 @@
         .user-wrapper small {
             color: #ffffff; /* White text for user information */
         }
+
+        .logout-btn {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -71,7 +78,7 @@
             </div>
             <ul class="nav flex-column mt-3">
                 <li class="nav-item">
-                    @Html.ActionLink("طلبات الترشح ", "IndexAdmin", "partyLists", new { area = "" }, new { @class = "nav-link" })
+                    @Html.ActionLink("طلبات الترشح", "IndexAdmin", "partyLists", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
                     @Html.ActionLink("طلبات المناظره", "", "", new { area = "" }, new { @class = "nav-link" })
@@ -80,7 +87,7 @@
                     @Html.ActionLink("طلبات الاعلانات", "", "", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink(" تواصل", "", "", new { area = "" }, new { @class = "nav-link" })
+                    @Html.ActionLink("تواصل", "", "", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
                     @Html.ActionLink("معلومات الناخب", "", "", new { area = "" }, new { @class = "nav-link" })
@@ -90,6 +97,14 @@
                 </li>
                 <li class="nav-item">
                     @Html.ActionLink("نتائج الانتخابات", "", "", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("اضافة ادمن", "Index", "Admins", new { area = "" }, new { @class = "nav-link" })
+                </li>
+
+                <li class="nav-item">
+                    <br />
+                    @Html.ActionLink("تسجيل الخروج", "Logout", "Home", new { area = "" }, new { @class = "btn btn-danger" })
                 </li>
             </ul>
         </nav>

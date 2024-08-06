@@ -1,12 +1,24 @@
-﻿
-@{
-    ViewBag.Title = "success";
+﻿@{
+    ViewBag.Title = "نجاح";
 }
 
-<h2>success</h2>
+<h2 class="text-center mb-4">نجاح</h2>
 
-
-<h2>رقم الدفع</h2>
-<p>
-    <strong style="color:green">رقم الدفع:</strong> @ViewBag.PaymentNumber
-</p>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'نجاح',
+                text: `رقم الدفع: @ViewBag.PaymentNumber`,
+                confirmButtonText: 'موافق'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the Index page
+                    window.location.href = '@Url.Action("Index", "Home")';
+                }
+            });
+        });
+    </script>
+}

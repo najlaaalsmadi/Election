@@ -1,7 +1,7 @@
 ﻿@model WebApplication16.Models.partyCandidate
 
 @{
-    ViewBag.Title = "إنشاء";
+    ViewBag.Title = "إنشاء مرشح";
 }
 
 <div class="container mt-5">
@@ -18,7 +18,7 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                         <div class="form-group mb-3">
-                            <label for="email" class="form-label">الايميل</label>
+                            <label for="email" class="form-label">البريد الإلكتروني</label>
                             @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                         </div>
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="phone" class="form-label">الهاتف</label>
+                            <label for="phone" class="form-label">رقم الهاتف</label>
                             @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
                         </div>
@@ -64,7 +64,7 @@
                                 {
                                     new SelectListItem { Text = "تنافسية", Value = "تنافسية" },
                                     new SelectListItem { Text = "مسيحية", Value = "مسيحية" },
-                                    new SelectListItem { Text = "شركسية", Value = "شركسية" },
+                                    new SelectListItem { Text = "شركسية", Value = "شركسية" }
                                 },
                                 new { @class = "form-control", @required = "required" })
                             @Html.ValidationMessageFor(model => model.typeOfChair, "", new { @class = "text-danger" })
@@ -126,26 +126,24 @@
 
 <style>
     body {
-        background-image: url('../../images/petra.jpg');
-        background-repeat: no-repeat;
+        background-color: #f0f4f8; /* خلفية خفيفة */
         font-family: 'Arial', sans-serif;
-        background-size: cover;
     }
 
     h2 {
         font-weight: bold;
-        color: #007bff;
+        color: #003366; /* كحلي داكن */
     }
 
     .form-background {
-       
+        background-color: #ffffff; /* خلفية بيضاء */
         padding: 30px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .form-horizontal {
-        background-color: rgba(255, 255, 255, 0.9);
+        background-color: #ffffff; /* خلفية بيضاء */
         padding: 30px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -153,8 +151,28 @@
 
     .form-label {
         font-weight: bold;
-        color: #343a40;
+        color: #003366; /* كحلي داكن */
     }
+
+    .btn-primary {
+        background-color: #004080; /* كحلي */
+        border-color: #003366; /* كحلي داكن */
+    }
+
+        .btn-primary:hover {
+            background-color: #003366; /* كحلي داكن */
+            border-color: #002244; /* كحلي أغمق */
+        }
+
+    .btn-secondary {
+        background-color: #0066cc; /* كحلي متوسط */
+        border-color: #005bb5; /* كحلي أغمق */
+    }
+
+        .btn-secondary:hover {
+            background-color: #005bb5; /* كحلي أغمق */
+            border-color: #004080; /* كحلي */
+        }
 
     .btn-animate {
         transition: transform 0.3s, box-shadow 0.3s;
@@ -175,6 +193,6 @@
     }
 
     .text-danger {
-        color: #dc3545;
+        color: #dc3545; /* لون أحمر للأخطاء */
     }
 </style>
