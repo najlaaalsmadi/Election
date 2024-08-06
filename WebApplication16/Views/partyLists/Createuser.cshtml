@@ -4,40 +4,38 @@
     ViewBag.Title = "Createuser";
 }
 
-<h2>إنشاء قائمة الحزب</h2>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">إنشاء قائمة الحزب</h2>
 
-<div class="row">
-    <!-- عمود النموذج -->
-    <div class="col-md-6">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+    <div class="row">
+        <!-- عمود النموذج -->
+        <div class="col-md-6 order-md-1 order-2">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-                <h4>إدخال اسم الحزب</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-horizontal p-5 rounded shadow-sm bg-white">
+                    <h4 class="mb-3 text-primary">إدخال اسم الحزب</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.partyName, "اسم الحزب", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.partyName, "اسم الحزب", htmlAttributes: new { @class = "form-label" })
                         @Html.EditorFor(model => model.partyName, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.partyName, "", new { @class = "text-danger" })
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <div class="col-md-12 d-flex justify-content-center">
-                        <input type="submit" value="إنشاء" class="btn btn-primary btn-animate" />
+                    <div class="form-group text-center">
+                        <input type="submit" value="إنشاء" class="btn btn-primary btn-animate w-50" />
                     </div>
                 </div>
-            </div>
-        }
-    </div>
+            }
+        </div>
 
-    <!-- عمود الصورة -->
-    <div class="col-md-6">
-        <img src="~/images/img1.jpg" class="img-fluid" alt="صورة تعبيرية" />
+        <!-- عمود الصورة -->
+        <div class="col-md-6 order-md-2 order-1 mb-4 mb-md-0">
+            <img src="~/images/img1.jpg" class="img-fluid rounded shadow-sm" alt="صورة تعبيرية" />
+        </div>
     </div>
 </div>
 
@@ -46,12 +44,39 @@
 }
 
 <style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h2 {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .form-horizontal {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #343a40;
+    }
+
     .btn-animate {
         transition: transform 0.3s, box-shadow 0.3s;
     }
 
         .btn-animate:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+    .img-fluid {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 </style>

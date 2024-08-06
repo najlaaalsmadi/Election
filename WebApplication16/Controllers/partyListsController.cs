@@ -18,7 +18,7 @@ namespace WebApplication16.Controllers
         private ElectionsEntities1 db = new ElectionsEntities1();
 
         // GET: partyLists
-        public ActionResult Index()
+        public ActionResult IndexAdmin()
         {
             // استرجاع بيانات الحزب من قاعدة البيانات
             var partyLists = db.partyLists.ToList();

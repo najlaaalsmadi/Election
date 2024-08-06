@@ -1,62 +1,98 @@
-﻿@model IEnumerable<WebApplication16.Models.partyCandidate>
+﻿<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+@model IEnumerable<WebApplication16.Models.partyCandidate>
 
 @{
     ViewBag.Title = "AdminView";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
-<h2>AdminView</h2>
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">قائمة المرشحين</h2>
 
-@if (Model != null && Model.Any())
-{
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.First().email)</th>
-                <th>@Html.DisplayNameFor(model => model.First().name)</th>
-                <th>@Html.DisplayNameFor(model => model.First().phone)</th>
-                <th>@Html.DisplayNameFor(model => model.First().nationalId)</th>
-                <th>@Html.DisplayNameFor(model => model.First().gender)</th>
-                <th>@Html.DisplayNameFor(model => model.First().birthDay)</th>
-                <th>@Html.DisplayNameFor(model => model.First().typeOfChair)</th>
-                <th>@Html.DisplayNameFor(model => model.First().religion)</th>
-                <th>@Html.DisplayNameFor(model => model.First().electoralDistrict)</th>
-                <th>@Html.DisplayNameFor(model => model.First().partyList.partyName)</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+    <div class="d-flex justify-content-center mb-4 w-100">
+        <div class="btn-group" role="group" aria-label="Filter buttons">
+            <button type="button" class="btn btn-outline-primary filter-btn" data-status="all">جميع المرشحين</button>
+            <button type="button" class="btn btn-outline-success filter-btn" data-status="completed">مكتمل</button>
+            <button type="button" class="btn btn-outline-secondary filter-btn" data-status="incomplete">غير مكتمل</button>
+        </div>
+    </div>
+
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
             {
-                var rowClass = item.status == "1" ? "table-success" : "table-secondary";
-                <tr class="@rowClass">
-                    <td>@Html.DisplayFor(modelItem => item.email)</td>
-                    <td>@Html.DisplayFor(modelItem => item.name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.phone)</td>
-                    <td>@Html.DisplayFor(modelItem => item.nationalId)</td>
-                    <td>@Html.DisplayFor(modelItem => item.gender)</td>
-                    <td>@(item.birthDay.HasValue ? item.birthDay.Value.ToString("yyyy-MM-dd") : string.Empty)</td>
-                    <td>@Html.DisplayFor(modelItem => item.typeOfChair)</td>
-                    <td>@Html.DisplayFor(modelItem => item.religion)</td>
-                    <td>@Html.DisplayFor(modelItem => item.electoralDistrict)</td>
-                    <td>@Html.DisplayFor(modelItem => item.partyList.partyName)</td>
-                    <td>
-                       
-                        @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger" }) |
-                        @Html.ActionLink("مكتمل", "SetStatus", new { id = item.id, status = "1" }, new { @class = "btn btn-sm btn-success" }) |
-                        @Html.ActionLink("غير مكتمل", "SetStatus", new { id = item.id, status = "0" }, new { @class = "btn btn-sm btn-secondary" })
+                var cardClass = item.status == "1" ? "border-success" : "border-secondary";
+                var badgeClass = item.status == "1" ? "badge-success" : "badge-secondary";
+                var statusText = item.status == "1" ? "مكتمل" : "غير مكتمل";
+                var cardStatus = item.status == "1" ? "completed" : "incomplete";
 
-                    </td>
-                </tr>
+                var imageUrl = item.status == "1" ? Url.Content("~/images/تم الموافقه على طلب.png") : Url.Content("~/images/طلب قيد دراسة.png");
+
+                <div class="col-md-4 mb-4 candidate-card" data-status="@cardStatus">
+                    <div class="card @cardClass shadow-sm">
+                        <img src="@imageUrl" class="card-img-top" alt="Party Image">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.name)</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <span class="badge @badgeClass">@statusText</span>
+                            </h6>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li><strong>البريد الإلكتروني:</strong> @Html.DisplayFor(modelItem => item.email)</li>
+                                <li><strong>الهاتف:</strong> @Html.DisplayFor(modelItem => item.phone)</li>
+                                <li><strong>رقم الهوية:</strong> @Html.DisplayFor(modelItem => item.nationalId)</li>
+                                <li><strong>الجنس:</strong> @Html.DisplayFor(modelItem => item.gender)</li>
+                                <li><strong>تاريخ الميلاد:</strong> @(item.birthDay.HasValue ? item.birthDay.Value.ToString("yyyy-MM-dd") : string.Empty)</li>
+                                <li><strong>نوع المقعد:</strong> @Html.DisplayFor(modelItem => item.typeOfChair)</li>
+                                <li><strong>الديانة:</strong> @Html.DisplayFor(modelItem => item.religion)</li>
+                                <li><strong>الدائرة الانتخابية:</strong> @Html.DisplayFor(modelItem => item.electoralDistrict)</li>
+                                <li><strong>اسم الحزب:</strong> @Html.DisplayFor(modelItem => item.partyList.partyName)</li>
+                            </ul>
+                            <div class="btn-group mt-3" role="group">
+                                @Html.ActionLink("حذف", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger mx-1" })
+                                @Html.ActionLink("مكتمل", "SetStatus", new { id = item.id, status = "1" }, new { @class = "btn btn-sm btn-success mx-1" })
+                                @Html.ActionLink("غير مكتمل", "SetStatus", new { id = item.id, status = "0" }, new { @class = "btn btn-sm btn-secondary mx-1" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+        }
+        else
+        {
+            <script type="text/javascript">
+                Swal.fire({
+                    icon: 'info',
+                    title: 'لا توجد مرشحين',
+                    text: 'لا توجد مرشحين للقائمة المحددة حالياً. يرجى التحقق من البيانات أو إضافة مرشحين جدد.',
+                    confirmButtonText: 'رجوع للخلف'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '@Url.Action("IndexAdmin", "partyLists")';
+                    }
+                });
+            </script>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".filter-btn").click(function () {
+                var status = $(this).data("status");
+                if (status === "all") {
+                    $(".candidate-card").show();
+                } else {
+                    $(".candidate-card").hide();
+                    $(".candidate-card[data-status='" + status + "']").show();
+                }
+            });
+        });
+    </script>
 }
-else
-{
-    <p>No candidates found for the selected party.</p>
-}
-<a href="@Url.Action("Index", "partyLists")" class="btn btn-dark">رجوع للخلف</a>
-
-
-
-    <div id="messageBox" class="alert" style="display: none;"></div>

@@ -1,0 +1,157 @@
+﻿@model IEnumerable<WebApplication16.Models.partyList>
+@{
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+    ViewBag.Title = "IndexAdmin";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center animated-header">طلبات قوائم الأحزاب</h2>
+
+    <div class="d-flex justify-content-center mb-4 w-100">
+        <div class="btn-group" role="group" aria-label="Filter buttons">
+            <button type="button" class="btn btn-outline-primary filter-btn" data-status="all">جميع الأحزاب</button>
+            <button type="button" class="btn btn-outline-success filter-btn" data-status="active">الأحزاب الفعالة</button>
+            <button type="button" class="btn btn-outline-secondary filter-btn" data-status="inactive">الأحزاب غير الفعالة</button>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            var cardClass = item.status == "1" ? "border-success" : "border-secondary";
+            var badgeClass = item.status == "1" ? "badge-success" : "badge-secondary";
+            var statusText = item.status == "1" ? "فعال" : "غير فعال";
+            var cardStatus = item.status == "1" ? "active" : "inactive";
+
+            var imageUrl = item.status == "1" ? Url.Content("~/images/تم الموافقه على طلب.png") : Url.Content("~/images/طلب قيد دراسة.png");
+
+            <div class="col-md-4 mb-4 party-card" data-status="@cardStatus">
+                <div class="card @cardClass shadow-card">
+                    <img src="@imageUrl" class="card-img-top" alt="Party Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.partyName)</h5>
+                        <h6 class="card-subtitle mb-2">
+                            <span class="badge @badgeClass">@statusText</span>
+                        </h6>
+                        <div class="btn-group mt-3" role="group">
+                            @Html.ActionLink("حذف", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm mx-1" })
+                            <button class="btn btn-primary btn-sm goToNextPage" data-partyname="@item.partyName">اذهب إلى التفاصيل</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".filter-btn").click(function() {
+                var status = $(this).data("status");
+                if (status === "all") {
+                    $(".party-card").show();
+                } else {
+                    $(".party-card").hide();
+                    $(".party-card[data-status='" + status + "']").show();
+                }
+            });
+
+            $(".goToNextPage").click(function() {
+                var partyName = $(this).data("partyname");
+                $.post('@Url.Action("StorePartyNameInSession", "PartyCandidates")', { partyName: partyName }, function(data) {
+                    if (data.success) {
+                        window.location.href = '@Url.Action("AdminView", "PartyCandidates")';
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<style>
+  
+
+    .container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #007bff;
+        font-weight: bold;
+        margin-bottom: 30px;
+        opacity: 0; /* Initial state */
+        animation: fadeIn 2s ease-in-out forwards; /* Apply animation */
+    }
+
+    .animated-header {
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    .btn-group .btn {
+        margin-right: 5px;
+    }
+
+    .card {
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .shadow-card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 1px solid #dee2e6;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .card-subtitle .badge {
+        font-size: 0.9rem;
+    }
+
+    .btn-group .btn {
+        margin-right: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-group .btn:hover {
+        transform: scale(1.05);
+    }
+
+    .border-success {
+        border-color: #28a745 !important;
+    }
+
+    .border-secondary {
+        border-color: #6c757d !important;
+    }
+
+    .badge-success {
+        background-color: #28a745;
+    }
+
+    .badge-secondary {
+        background-color: #6c757d;
+    }
+</style>

@@ -6,90 +6,101 @@
     <title>@ViewBag.Title</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa; /* Light background color */
+        }
+
         .nav-link {
-            color: white;
+            color: #ffffff; /* White color for the nav links */
         }
 
         .sidebar {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 100;
-            height: 100vh; /* Full viewport height */
-            overflow: auto; /* Scroll if content exceeds viewport height */
-            background-color: #007a33; /* Green color */
+            background-color: #001f3f; /* Navy color for the sidebar */
+            min-height: 100vh; /* Full viewport height */
         }
 
         .sidebar-header {
-            background-color: #d71a34; /* Red color */
+            background-color: #004080; /* Darker navy color */
+            color: #ffffff; /* White text color */
+            padding: 20px;
+            text-align: center;
         }
 
+            .sidebar-header h4 {
+                margin-bottom: 0;
+            }
+
         .content {
-            margin-left: 250px; /* Same as the sidebar width */
+            background-color: #ffffff; /* White background for content */
+            min-height: 100vh; /* Ensure content takes full height */
             padding: 20px;
         }
 
         .nav-item {
-            border-bottom: 1px solid #ffffff; /* White border for separation */
+            border-bottom: 1px solid #004080; /* Darker navy border for separation */
         }
 
         .nav-link:hover {
-            background-color: #d71a34; /* Red background on hover */
+            background-color: #0055a5; /* Lighter navy background on hover */
             color: #ffffff; /* White text on hover */
         }
 
         .user-wrapper img {
             border: 3px solid #ffffff; /* White border around the profile picture */
+            margin-bottom: 10px;
+        }
+
+        .user-wrapper h4,
+        .user-wrapper small {
+            color: #ffffff; /* White text for user information */
         }
     </style>
 </head>
 <body>
-    <div class="d-flex justify-content-around">
-        <nav class="sidebar d-flex flex-column p-3">
-            <div class="sidebar-header p-3 text-center mb-3">
-                <div class="user-wrapper d-flex align-items-center mt-3 mt-md-0">
-                    <img src="~/image/نجلاء.jpg" alt="User" class="rounded-circle mr-2" style="width: 100px; height: 100px;" />
-                    <div>
+    <div class="d-flex flex-column flex-md-row">
+        <nav class="sidebar d-flex flex-column p-3 w-80 w-md-auto mb-3 mb-md-0">
+            <div class="sidebar-header">
+                <div class="user-wrapper d-flex flex-column align-items-center">
+                    <img src="~/images/instructor8.png" alt="User" class="rounded-circle" style="width: 100px; height: 100px;" />
+                    <div class="text-center">
                         <h4>najlaa alsmadi</h4>
                         <small>Super admin</small>
                     </div>
                 </div>
             </div>
-            <ul class="nav flex-column">
+            <ul class="nav flex-column mt-3">
                 <li class="nav-item">
-                    @Html.ActionLink("Dashboard", "Index", "admin", new { area = "" }, new { @class = "nav-link" })
+                    @Html.ActionLink("طلبات الترشح ", "IndexAdmin", "partyLists", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Charts", "Charts", "admin", new { area = "" }, new { @class = "nav-link" })
+                    @Html.ActionLink("طلبات المناظره", "", "", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Tables</a>
+                    @Html.ActionLink("طلبات الاعلانات", "", "", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Forms</a>
+                    @Html.ActionLink(" تواصل", "", "", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Calendar</a>
+                    @Html.ActionLink("معلومات الناخب", "", "", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Maps</a>
+                    @Html.ActionLink("تاريخ البدايه والنهاية", "", "", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Pages</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">UI Elements</a>
+                    @Html.ActionLink("نتائج الانتخابات", "", "", new { area = "" }, new { @class = "nav-link" })
                 </li>
             </ul>
         </nav>
 
-        <div class="content">
+        <div class="content flex-grow-1">
             @RenderBody()
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
