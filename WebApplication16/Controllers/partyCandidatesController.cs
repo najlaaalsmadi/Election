@@ -123,50 +123,6 @@ namespace WebApplication16.Controllers
 }
 
 
-
-
-
-        //public ActionResult SetStatus(long id, string status)
-        //{
-        //    var candidate = db.partyCandidates.Find(id);
-        //    if (candidate == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    candidate.status = status;
-        //    db.Entry(candidate).State = EntityState.Modified;
-        //    db.SaveChanges();
-
-        //    // تحقق من حالة المرشحين الآخرين
-        //    var party = db.partyLists.Find(candidate.partyId);
-        //    if (party != null)
-        //    {
-        //        var allApproved = db.partyCandidates.Where(c => c.partyId == candidate.partyId).All(c => c.status == "1");
-        //        var anyRejected = db.partyCandidates.Where(c => c.partyId == candidate.partyId).Any(c => c.status == "0");
-
-        //        if (anyRejected)
-        //        {
-        //            party.status = "0"; // تم الرفض
-        //            SendEmail("admin@example.com", "Candidate Rejected", $"Candidate {candidate.name} has been rejected.");
-        //        }
-        //        else if (allApproved)
-        //        {
-        //            party.status = "1"; // تم الموافقة
-        //            SendEmail("admin@example.com", "All Candidates Approved", "All candidates have been approved.");
-        //        }
-
-        //        db.Entry(party).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //    }
-
-        //    return RedirectToAction("AdminView");
-        //}
-
-
-
-
-
         [HttpPost]
         public JsonResult StorePartyNameInSession(string partyName)
         {
@@ -196,11 +152,6 @@ namespace WebApplication16.Controllers
             ViewBag.PartyName = partyName;
             return View(candidates);
         }
-
-
-
-
-
 
 
         [HttpGet]
@@ -497,40 +448,8 @@ namespace WebApplication16.Controllers
         }
 
 
-        // GET: partyCandidates/Edit/5
-        public ActionResult Edit(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var partyCandidate = db.partyCandidates.Find(id);
-
-            if (partyCandidate == null)
-            {
-                return HttpNotFound();
-            }
-
-            ViewBag.partyId = new SelectList(db.partyLists, "id", "partyName", partyCandidate.partyId);
-            return View(partyCandidate);
-        }
-
-        // POST: partyCandidates/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,partyId,email,name,phone,nationalId,gender,birthDay,typeOfChair,religion,status,electoralDistrict")] partyCandidate partyCandidate)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(partyCandidate).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.partyId = new SelectList(db.partyLists, "id", "partyName", partyCandidate.partyId);
-            return View(partyCandidate);
-        }
+      
+      
 
         // GET: partyCandidates/Delete/5
         public ActionResult Delete(long? id)
