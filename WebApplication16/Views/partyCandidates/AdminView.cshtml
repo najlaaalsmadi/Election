@@ -47,11 +47,10 @@
                         var badgeClass = item.status == "1" ? "badge-success" : "badge-secondary";
                         var statusText = item.status == "1" ? "مكتمل" : "غير مكتمل";
                         var rowClass = item.status == "1" ? "completed" : "incomplete";
-
                         var imageUrl = item.status == "1" ? Url.Content("~/images/تم الموافقه على طلب.png") : Url.Content("~/images/طلب قيد دراسة.png");
 
                         <tr class="candidate-row" data-status="@rowClass" data-name="@item.name" data-status-value="@item.status" data-email="@item.email" data-phone="@item.phone" data-nationalId="@item.nationalId" data-gender="@item.gender" data-birthDay="@item.birthDay" data-typeOfChair="@item.typeOfChair" data-religion="@item.religion" data-electoralDistrict="@item.electoralDistrict" data-partyName="@item.partyList.partyName">
-                            <td><img src="@imageUrl" alt="Party Image" class="img-fluid rounded-circle" style="height: 50px; width: 50px; object-fit: cover;"></td>
+                            <td><img src="@imageUrl" alt="Candidate Image" class="img-fluid rounded-circle" style="height: 50px; width: 50px; object-fit: cover;"></td>
                             <td>@Html.DisplayFor(modelItem => item.name)</td>
                             <td><span class="badge @badgeClass">@statusText</span></td>
                             <td>@Html.DisplayFor(modelItem => item.email)</td>
@@ -65,9 +64,9 @@
                             <td>@Html.DisplayFor(modelItem => item.partyList.partyName)</td>
                             <td>
                                 <div class="btn-group-vertical" role="group">
-                                    @Html.ActionLink("حذف", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger my-1" })
-                                    @Html.ActionLink("مكتمل", "SetStatus", new { id = item.id, status = "1" }, new { @class = "btn btn-sm btn-success my-1" })
-                                    @Html.ActionLink("غير مكتمل", "SetStatus", new { id = item.id, status = "0" }, new { @class = "btn btn-sm btn-secondary my-1" })
+                                    @Html.ActionLink("حذف", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger my-1 custom-btn" })
+                                    @Html.ActionLink("مكتمل", "SetStatus", new { id = item.id, status = "1" }, new { @class = "btn btn-sm btn-success my-1 custom-btn" })
+                                    @Html.ActionLink("غير مكتمل", "SetStatus", new { id = item.id, status = "0" }, new { @class = "btn btn-sm btn-secondary my-1 custom-btn" })
                                 </div>
                             </td>
                         </tr>
@@ -177,6 +176,10 @@
         cursor: pointer;
     }
 
+        .candidate-row:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
         .candidate-row:hover {
             background-color: #f1f1f1;
         }
@@ -199,4 +202,20 @@
         color: white;
     }
 
+    .custom-btn {
+        border-radius: 8px; /* Rounded corners */
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Light shadow effect */
+    }
+
+        .custom-btn:hover {
+            transform: translateY(-2px); /* Move button up on hover */
+            background-color: #004085; /* Background color on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Darker shadow effect on hover */
+        }
+
+        .custom-btn:focus {
+            outline: none; /* Remove default focus outline */
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Focus shadow effect */
+        }
 </style>

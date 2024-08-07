@@ -46,6 +46,7 @@ namespace WebApplication16.Controllers
                 {
                     // البيانات غير صحيحة
                     ModelState.AddModelError("", "البريد الإلكتروني أو كلمة المرور غير صحيحة");
+                    TempData["LoginError"] = "البريد الإلكتروني أو كلمة المرور غير صحيحة";
                 }
             }
 

@@ -23,4 +23,5 @@ namespace WebApplication16.Models
     
         public virtual localList localList { get; set; }
     }
+
 }
